@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <link href="./styles.css" rel="stylesheet">
+    <title>카오스큐브 레더 릴레이 현황</title>
+    <link rel="stylesheet" type="text/css" href="datatables.min.css"/>
+</head>
+<body>
+<div>
+    <span class="uber-alert">우버디아 알림판</span>
+    <div class="js-sticky-widget">
+        <div class="progress" id="progress">진행도(1~6)</div>
+        <div class="server" id="server">서버</div>
+        <div class="mod" id="mod">모드</div>
+        <div class="date" id="date">갱신시간</div>
+    </div>
+    <div class="js-sticky-widget">
+        <div class="progress" id="progress1"></div>
+        <div class="server" id="server1"></div>
+        <div class="mod" id="mod1"></div>
+        <div class="date" id="date1"></div>
+    </div>
+    <div class="js-sticky-widget">
+        <div class="progress" id="progress2"></div>
+        <div class="server" id="server2"></div>
+        <div class="mod" id="mod2"></div>
+        <div class="date" id="date2"></div>
+    </div>
+    <div class="js-sticky-widget">
+        <div class="progress" id="progress3"></div>
+        <div class="server" id="server3"></div>
+        <div class="mod" id="mod3"></div>
+        <div class="date" id="date3"></div>
+    </div>
+    <div class="js-sticky-widget">
+        <div class="progress" id="progress4"></div>
+        <div class="server" id="server4"></div>
+        <div class="mod" id="mod4"></div>
+        <div class="date" id="date4"></div>
+    </div>
+    <div class="js-sticky-widget">
+        <div class="progress" id="progress5"></div>
+        <div class="server" id="server5"></div>
+        <div class="mod" id="mod5"></div>
+        <div class="date" id="date5"></div>
+    </div>
+    <div class="js-sticky-widget">
+        <div class="progress" id="progress6"></div>
+        <div class="server" id="server6"></div>
+        <div class="mod" id="mod6"></div>
+        <div class="date" id="date6"></div>
+    </div>
+</div>
+<table id="chaoscube" class="display" style="width:100%">
+</table>
+<script type="text/javascript" src="datatables.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+/* styles.css */
+
+.decoRemove {
+    text-decoration: none;
+    color: black;
+}
+
+.js-sticky-widget {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.progress {
+    width: 90px;
+}
+.server {
+    width: 80px;
+}
+.date {
+    width: 180px;
+}
+.mod {
+    width: 85px;
+}
+.uber-alert {
+    text-align: center;
+    display: block;
+    font-weight: 800;
+    font-size: x-large;
+}
+/* Add styles here to customize the appearance of your app */

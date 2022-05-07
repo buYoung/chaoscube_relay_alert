@@ -1,0 +1,63 @@
+{
+  "name": "chaoscube_relay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "build --win --x64",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.10",
+    "iconv-lite": "^0.6.3",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.3",
+    "terminal-kit": "^2.4.0",
+    "winston": "^3.7.2",
+    "winston-daily-rotate-file": "^4.6.1"
+  },
+  "devDependencies": {
+    "electron": "^18.2.0"
+  },
+  "build": {
+    "productName": "카큐릴레이방 현황",
+    "appId": "livteam.chaoscuberelay",
+    "asar": true,
+    "mac": {
+      "target": [
+        "default"
+      ],
+      "icon": "build/icons/icon.icns"
+    },
+    "dmg": {
+      "title": "NB",
+      "icon": "build/icons/icon.icns"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icons/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true,
+      "perMachine": true,
+      "language": 1042,
+      "installerIcon": "build/icons/icon.ico",
+      "shortcutName": "NB",
+      "artifactName": "NB-${version}.${ext}",
+      "uninstallDisplayName": "NB"
+    },
+    "directories": {
+      "buildResources": "./build/",
+      "output": "./dist/"
+    }
+  }
+}
