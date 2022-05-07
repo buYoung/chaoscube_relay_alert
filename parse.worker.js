@@ -62,7 +62,6 @@ if (!isMainThread) {
                 })
             })
 
-            console.log(data)
             parentPort.postMessage({
                 type: 1,
                 data:data

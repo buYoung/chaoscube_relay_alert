@@ -4,6 +4,7 @@
 // `nodeIntegration` is turned off. Use `preload.js` to
 // selectively enable features needed in the rendering
 // process.
+const { ipcRenderer } = require('electron')
 let table;
 $(document).ready(function () {
     table = $('#chaoscube').DataTable({
@@ -26,13 +27,13 @@ $(document).ready(function () {
             {title: "id"},
             {
                 title: "제목", render: (data, i, row, meta) => {
-
-                    return `<a class="decoRemove" onclick="openWindow('${row.url}')">${data}</a>`;
+                    return `<a class="decoRemove">${data}</a>`;
+                    // return `<a class="decoRemove" onclick="openWindow('${row.url}')">${data}</a>`;
                 }
             },
             {
                 title: "내용", render: (data, i, row, meta) => {
-                    return `<a class="decoRemove" onclick="openWindow('${row.url}')">${data}</a>`;
+                    return `<a class="decoRemove">${data}</a>`;
                 }
             },
             {
@@ -47,30 +48,28 @@ $(document).ready(function () {
     });
 });
 
-function openWindow(url) {
-    const remote = require('electron').remote;
-    const BrowserWindow = remote.BrowserWindow;
-    const win = new BrowserWindow({
-        height: 600,
-        width: 800
-    });
-
-    win.loadURL('<url>');
-}
+ipcRenderer.on('refresh', (e, data) => {
+    switch (data.type) {
+        case 0:
+            refreshDataTable(data.data);
+            break;
+        case 1:
+            refreshUberAlert(data.data);
+            break;
+    }
+})
 
 function refreshDataTable(data) {
     table.clear().draw();
-    let dataArray = JSON.parse(data);
-    table.rows.add(dataArray).draw();
+    table.rows.add(data).draw();
 }
 
 function refreshUberAlert(data) {
-    let dataArray = JSON.parse(data);
-    for (let i = 0; i < dataArray.length; i++) {
-        $(`#progress${i + 1}*`).text(dataArray[i].progress);
-        $(`#server${i + 1}*`).text(dataArray[i].server);
-        $(`#mod${i + 1}*`).text(dataArray[i].mod);
-        $(`#date${i + 1}*`).text(dataArray[i].date);
+    for (let i = 0; i < data.length; i++) {
+        $(`#progress${i + 1}*`).text(data[i].progress);
+        $(`#server${i + 1}*`).text(data[i].server);
+        $(`#mod${i + 1}*`).text(data[i].mod);
+        $(`#date${i + 1}*`).text(data[i].date);
     }
 }
 

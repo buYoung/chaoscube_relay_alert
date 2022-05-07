@@ -2,6 +2,7 @@ const path = require("path");
 const {isMainThread, Worker, workerData} = require('worker_threads');
 const logger = require("./logger");
 const cheerio = require("cheerio");
+const {ipcMain} =require("electron")
 const _ = require("lodash");
 const moment = require("moment");
 const workerPath = path.join(__dirname, "parse.worker.js");
@@ -18,13 +19,15 @@ setInterval(v => {
     _.map(sortData, (v) => {
         datas.push([v.id, v.title, v.content, v.date, v.url])
     })
+    electronWindow.webContents.send('refresh', {type: 0, data: datas})
+    electronWindow.webContents.send('refresh', {type: 1, data: uberAlert})
 
-    electronWindow.webContents.executeJavaScript(`refreshDataTable('${JSON.stringify(datas).replaceAll("'", "\\'").replaceAll('"','\\"')}')`).catch(e => {
-        console.log("refresh Error", e)
-    })
-    electronWindow.webContents.executeJavaScript(`refreshUberAlert('${JSON.stringify(uberAlert).replaceAll("'", "\\'").replaceAll('"','\\"')}')`).catch(e => {
-        console.log("refresh Error", e)
-    })
+    // electronWindow.webContents.executeJavaScript(`refreshDataTable('${ObjectTostring(datas)}')`).catch(e => {
+    //     console.log("refresh Error", e)
+    // })
+    // electronWindow.webContents.executeJavaScript(`refreshUberAlert('${ObjectTostring(uberAlert)}')`).catch(e => {
+    //     console.log("refresh Error", e)
+    // })
 
     electronWindow.setTitle(`카오스큐브 레더 릴레이 현황 ${moment().format("A hh:mm:ss").replace("PM", "오후").replace("AM","오전")}`)
 }, 1000)
@@ -92,5 +95,3 @@ if (isMainThread) {
         logger.error(`${v} 이유료 종료됨`);
     })
 }
-
-
